@@ -42,8 +42,17 @@ void MainWindow::save(){
 }
 
 void MainWindow::load(){
+    // get filename from user
     QString filename = QFileDialog::getOpenFileName(this,
         tr("Load Animation"), "", tr("*.ae"));
+
+    // only if file was opened
+    if(filename.size()){
+        // TODO load file and show first frame
+        this->setWindowTitle("animationEditor - " + filename);
+        currentFrame = 1;
+        showCurrentFrame();
+    }
 }
 
 void MainWindow::nextFrame(){
