@@ -49,7 +49,6 @@ void MainWindow::load(){
 void MainWindow::nextFrame(){
     ++currentFrame;
     showCurrentFrame();
-    ui->frameNumber->setText(QString::number(currentFrame));
 }
 
 void MainWindow::prevFrame(){
