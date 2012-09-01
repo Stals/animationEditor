@@ -43,7 +43,7 @@ void MainWindow::save(){
 
 void MainWindow::load(){
     QString filename = QFileDialog::getOpenFileName(this,
-        tr("Open Animation"), "", tr("*.ae"));
+        tr("Load Animation"), "", tr("*.ae"));
 }
 
 void MainWindow::nextFrame(){
