@@ -4,7 +4,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    currentFrame(1){
+    currentFrameNumber(1){
     ui->setupUi(this);
 
     /* Create fileMenu */
@@ -50,27 +50,30 @@ void MainWindow::load(){
     if(filename.size()){
         // TODO load file and show first frame
         this->setWindowTitle("animationEditor - " + filename);
-        currentFrame = 1;
+        currentFrameNumber = 1;
         showCurrentFrame();
     }
 }
 
 void MainWindow::nextFrame(){
-    ++currentFrame;
+    ++currentFrameNumber;
     showCurrentFrame();
 }
 
 void MainWindow::prevFrame(){
     // go to previous frame unless it is the first one
-    if(currentFrame > 1){
-        --currentFrame;
+    if(currentFrameNumber > 1){
+        --currentFrameNumber;
         showCurrentFrame();
     } // else dont change anything
 }
 
 void MainWindow::showCurrentFrame(){
-    // TODO get data and show it
-
     // change frameNumber
-    ui->frameNumber->setText(QString::number(currentFrame));
+    ui->frameNumber->setText(QString::number(currentFrameNumber));
+
+    // TODO get data and show it
+        // get it from vector like this animation[currentFrame - 1]
+            // Can probably make showCurrentFrame after inheriting GraficsView,
+            //(after renameign to to FrameVier) and give this mehid a frame
 }

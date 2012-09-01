@@ -38,7 +38,7 @@ private:
     QAction *saveAction;
     QAction *loadAction;
 
-    int currentFrame;
+    int currentFrameNumber;
 
 };
 
