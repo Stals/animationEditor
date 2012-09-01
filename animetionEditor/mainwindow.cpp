@@ -3,7 +3,8 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow){
+    ui(new Ui::MainWindow),
+    currentFrame(1){
     ui->setupUi(this);
 
     /* Create fileMenu */
@@ -42,10 +43,21 @@ void MainWindow::load(){
 }
 
 void MainWindow::nextFrame(){
-    ui->label->setText("next");
+    ++currentFrame;
+    showCurrentFrame();
+    ui->frameNumber->setText(QString::number(currentFrame));
 }
 
 void MainWindow::prevFrame(){
-    ui->label->setText("prev");
+    if(currentFrame > 1){
+        --currentFrame;
+        showCurrentFrame();
+    } // else dont change anything
+}
 
+void MainWindow::showCurrentFrame(){
+    // TODO get data and show it
+
+    // change frameNumber
+    ui->frameNumber->setText(QString::number(currentFrame));
 }

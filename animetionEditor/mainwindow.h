@@ -20,20 +20,25 @@ protected:
     void keyPressEvent(QKeyEvent* event);
     
 private slots:
-    // Позволяет сохранить текущую анимацию в выбранный файл
+    // Save animation to a chosen file
     void save();
-    // Позволяет загрузить анимацию из файла
+    // Loads animation from file
     void load();
-    // Переходит на следующий кадр
+    // go to next frame
     void nextFrame();
-    // Переходит на предведущий кадр
+    // go to previous frame
     void prevFrame();
+
+    // displays current frame and updates frameNumeber
+    void showCurrentFrame();
 
 private:
     Ui::MainWindow *ui;
     QMenu *fileMenu;
     QAction *saveAction;
     QAction *loadAction;
+
+    int currentFrame;
 
 };
 
