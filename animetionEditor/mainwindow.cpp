@@ -27,10 +27,14 @@ MainWindow::~MainWindow(){
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
+    // A or left arrow key - go to previous frame
+    // D or right arrow key - go to next frame
     switch (event->key()) {
-            case Qt::Key_A: prevFrame(); break;
-            case Qt::Key_D: nextFrame(); break;
-        }
+        case Qt::Key_Left: //fall throw
+        case Qt::Key_A: prevFrame(); break;
+        case Qt::Key_Right: //fall throw
+        case Qt::Key_D: nextFrame(); break;
+    }
 }
 
 void MainWindow::save(){
@@ -49,6 +53,7 @@ void MainWindow::nextFrame(){
 }
 
 void MainWindow::prevFrame(){
+    // go to previous frame unless it is the first one
     if(currentFrame > 1){
         --currentFrame;
         showCurrentFrame();
