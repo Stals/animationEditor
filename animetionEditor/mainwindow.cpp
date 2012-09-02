@@ -54,6 +54,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
         case Qt::Key_Right: //fall throw
         case Qt::Key_D: nextFrame(); break;
     }
+    QMainWindow::keyPressEvent(event);
 }
 
 void MainWindow::save(){
