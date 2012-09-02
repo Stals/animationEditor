@@ -133,7 +133,7 @@ void GraphWidget::mousePressEvent(QMouseEvent *event){
     QGraphicsView::mousePressEvent(event);
 }
 
-void GraphWidget::removeNode(Node* node){
+void GraphWidget::removeNode(Node *node){
     scene()->removeItem(node);
     // deleting node will also delete all conected edges
     delete node;
@@ -147,9 +147,9 @@ void GraphWidget::removeEdge(Edge *edge){
 
 void GraphWidget::emptyScene(){
     // TODO может быть утечка памяти, так как я не удаляю сами объекты
-        QList<Node *> nodes;
+        QList<Node*> nodes;
         foreach (QGraphicsItem *item, scene()->items()) {
-            if (Node *node = qgraphicsitem_cast<Node *>(item))
+            if (Node *node = qgraphicsitem_cast<Node*>(item))
                 nodes << node;
         }
 

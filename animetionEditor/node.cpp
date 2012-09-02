@@ -37,7 +37,7 @@ void Node::removeEdge(Edge *edge){
     edgeList.remove(edge);
 }
 
-std::list<Edge *> Node::edges() const{
+std::list<Edge*> Node::edges() const{
     return edgeList;
 }
 

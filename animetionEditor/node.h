@@ -4,14 +4,11 @@
 #include <QGraphicsItem>
 #include <list>
 
-
 class Edge;
 class GraphWidget;
 QT_BEGIN_NAMESPACE
 class QGraphicsSceneMouseEvent;
 QT_END_NAMESPACE
-
-
 
 // TODO description
 // x and y are stored in base class
@@ -22,7 +19,7 @@ public:
 
     void addEdge(Edge *edge);
     void removeEdge(Edge *edge);
-    std::list<Edge *> edges() const;
+    std::list<Edge*> edges() const;
 
     enum { Type = UserType + 1 };
     int type() const { return Type; }
@@ -43,7 +40,7 @@ private:
     static const double ellipseSide = 15;
     QPointF newPos;
     GraphWidget *graph;
-    std::list<Edge *> edgeList;
+    std::list<Edge*> edgeList;
 };
 
 #endif
