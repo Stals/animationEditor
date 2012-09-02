@@ -70,9 +70,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         gradient.setColorAt(1, Qt::black);
     }
     painter->setBrush(gradient);
-
     painter->setPen(QPen(Qt::black, 0));
-
 
     painter->drawEllipse((-1)*ellipseSide/2, (-1)*ellipseSide/2, ellipseSide, ellipseSide);
 }
