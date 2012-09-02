@@ -36,6 +36,8 @@ private:
 
     GraphWidget *graph;
 
+    static const int lineWidth = 2;
+
 };
 
 #endif

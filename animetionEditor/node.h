@@ -27,8 +27,7 @@ public:
     enum { Type = UserType + 1 };
     int type() const { return Type; }
 
-    bool advance();
-
+    bool advance(); //TODO mb remove
 
     QRectF boundingRect() const;
     QPainterPath shape() const;
@@ -41,6 +40,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     
 private:
+    static const double ellipseSide = 15;
     QPointF newPos;
     GraphWidget *graph;
     std::list<Edge *> edgeList;

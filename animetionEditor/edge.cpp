@@ -47,10 +47,9 @@ void Edge::adjust(){
 
     prepareGeometryChange();
 
-    if (length > qreal(20.)) {
-        QPointF edgeOffset((line.dx() * 10) / length, (line.dy() * 10) / length);
-        sourcePoint = line.p1() + edgeOffset;
-        destPoint = line.p2() - edgeOffset;
+    if (length > qreal(20.)) { // TODO откуда 20? размер ноды? бывший
+        sourcePoint = line.p1();
+        destPoint = line.p2();
     } else {
         sourcePoint = destPoint = line.p1();
     }
@@ -60,7 +59,7 @@ QRectF Edge::boundingRect() const{
 //    if (!source || !dest)
 //        return QRectF();
 
-//    qreal penWidth = 1;
+//    qreal penWidth = lineWidth;
 //    qreal extra = (penWidth ) / 2.0;
 
 //    return QRectF(sourcePoint, QSizeF(destPoint.x() - sourcePoint.x(),
@@ -94,7 +93,7 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
         return;
 
     // Draw the line itself
-    painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter->setPen(QPen(Qt::black, lineWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(line);
 }
 

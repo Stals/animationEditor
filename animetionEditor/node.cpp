@@ -50,15 +50,12 @@ bool Node::advance(){
 }
 
 QRectF Node::boundingRect() const{
-    qreal adjust = 2;
-    return QRectF( -10 - adjust, -10 - adjust,
-                  23 + adjust, 23 + adjust);
-
+    return QRectF((-1)*ellipseSide/2, (-1)*ellipseSide/2, ellipseSide, ellipseSide);
 }
 
 QPainterPath Node::shape() const{
     QPainterPath path;
-    path.addEllipse(-10, -10, 20, 20);
+    path.addEllipse((-1)*ellipseSide/2, (-1)*ellipseSide/2, ellipseSide, ellipseSide);
     return path;
 }
 
@@ -76,8 +73,8 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     painter->setPen(QPen(Qt::black, 0));
 
-    double ellipseSide = 20;
-    painter->drawEllipse((-1)*ellipseSide / 2, (-1)*ellipseSide / 2, ellipseSide, ellipseSide);
+
+    painter->drawEllipse((-1)*ellipseSide/2, (-1)*ellipseSide/2, ellipseSide, ellipseSide);
 }
 
 QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value){
