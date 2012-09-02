@@ -9,6 +9,7 @@ class Animation{
 public:
     Animation();
     ~Animation();
+    void addFrame(Frame frame);
 
     std::vector<Frame> frames;
 };
