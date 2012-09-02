@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     currentFrameNumber(1){
+
     ui->setupUi(this);
 
     /* Create fileMenu */
@@ -19,10 +20,28 @@ MainWindow::MainWindow(QWidget *parent) :
     loadAction = new QAction(tr("Load"), this);
     fileMenu->addAction(loadAction);
     connect(loadAction, SIGNAL(triggered()), this, SLOT(load()));
+
+    /* GraphWidget */
+    graphWidget = new GraphWidget(this);
+    // TODO why 410? Причем если менять ошибка только при создании. Тоесть mouse event что-то не так понимает
+    graphWidget->setGeometry(0,ui->menuBar->height(),410,410);
+
+    /* frameNumber */
+    frameNumber = new QLabel("1", graphWidget);
+    // move it in a right up corner
+    frameNumber->setAlignment(Qt::AlignRight);
+    const int labelIndent = 5;
+    const int labelWidth = 20;
+    const int labelHeight = 15;
+    frameNumber->setGeometry(graphWidget->width() - labelWidth - labelIndent, labelIndent,
+                             labelWidth, labelHeight);
+
 }
 
 
 MainWindow::~MainWindow(){
+    delete frameNumber;
+    delete graphWidget;
     delete ui;
 }
 
@@ -70,7 +89,7 @@ void MainWindow::prevFrame(){
 
 void MainWindow::showCurrentFrame(){
     // change frameNumber
-    ui->frameNumber->setText(QString::number(currentFrameNumber));
+    frameNumber->setText(QString::number(currentFrameNumber));
 
     // TODO get data and show it
         // get it from vector like this animation[currentFrame - 1]
