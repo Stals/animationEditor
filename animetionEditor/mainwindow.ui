@@ -39,19 +39,6 @@
      <string>add adges</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>410</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

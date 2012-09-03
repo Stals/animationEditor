@@ -123,20 +123,21 @@ void MainWindow::on_checkBox_toggled(bool checked){
         graphWidget->from = NULL;
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    Frame *frame = new Frame;
-    animation->addFrame(frame);
+//TODO take code for loading
+//void MainWindow::on_pushButton_clicked()
+//{
+//    Frame *frame = new Frame;
+//    animation->addFrame(frame);
 
-    Node *node1 = new Node(graphWidget, 100, 100);
-    Node *node2 = new Node(graphWidget, 50, 50);
+//    Node *node1 = new Node(graphWidget, 100, 100);
+//    Node *node2 = new Node(graphWidget, 50, 50);
 
-    frame->addNode(node1);
-    frame->addNode(node2);
+//    frame->addNode(node1);
+//    frame->addNode(node2);
 
-    Edge *edge = new Edge(graphWidget, node1, node2);
+//    Edge *edge = new Edge(graphWidget, node1, node2);
 
-    frame->addEdge(edge);
+//    frame->addEdge(edge);
 
-    this->showCurrentFrame();
-}
+//    this->showCurrentFrame();
+//}
