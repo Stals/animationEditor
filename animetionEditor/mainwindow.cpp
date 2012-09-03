@@ -123,6 +123,8 @@ void MainWindow::save(){
 }
 
 void MainWindow::load(){
+
+
     QString fileName = QFileDialog::getOpenFileName(this,
                                                     tr("Load Animation"), "",
                                                     tr("(*.ae)"));
@@ -137,9 +139,9 @@ void MainWindow::load(){
                                      file.errorString());
             return;
         }
-        /*
-            TODO DO STUFF HERE
-        */
+
+        // reset node id's so that they will start from 0 again
+        Node::resetNewId();
 
         QDomDocument doc;
         if (!doc.setContent(&file)) {

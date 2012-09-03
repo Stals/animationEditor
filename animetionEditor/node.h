@@ -18,6 +18,9 @@ public:
     Node(GraphWidget *graphWidget, qreal x = 0, qreal y = 0);
     ~Node();
     int id;
+    // resets newId to 0
+    // used when removing previous animation
+    static void resetNewId();
 
     void addEdge(Edge *edge);
     void removeEdge(Edge *edge);
@@ -32,8 +35,6 @@ public:
 
     enum { Type = UserType + 1 };
     int type() const { return Type; }
-
-    bool advance(); //TODO mb remove
 
     QRectF boundingRect() const;
     QPainterPath shape() const;

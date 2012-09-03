@@ -25,6 +25,10 @@ Node::Node(GraphWidget *graphWidget, qreal x, qreal y)
 Node::~Node(){
 }
 
+void Node::resetNewId(){
+    newId = 0;
+}
+
 void Node::addEdge(Edge *edge){
     edgeList.push_back(edge);
     edge->adjust();
@@ -56,14 +60,6 @@ Edge *Node::isConnected(Node *node1, Node *node2){
 
 std::list<Edge*> Node::edges() const{
     return edgeList;
-}
-
-bool Node::advance(){
-//    if (newPos == pos())
-//        return false;
-
-//    setPos(newPos);
-//    return true;
 }
 
 QRectF Node::boundingRect() const{
