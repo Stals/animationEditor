@@ -52,6 +52,7 @@ private:
 
     GraphWidget *graphWidget;
     QLabel *frameNumber;
+
     QMenu *fileMenu;
     QAction *saveAction;
     QAction *loadAction;
