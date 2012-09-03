@@ -168,16 +168,15 @@ void GraphWidget::emptyScene(){
 
 //TODO what if node1 == node2?
 Edge *GraphWidget::createEdge(Node *node1, Node *node2){
+
     // Check if nodes are already connected
     // just return pointer to this edge if they are
-    std::list<Edge*> edges = node1->edges();
-    for(std::list<Edge*>::iterator edgeIt = edges.begin(); edgeIt != edges.end(); ++edgeIt){
-    if(((*edgeIt)->destNode() == node2) || ((*edgeIt)->sourceNode() == node2)){
-            return *edgeIt;
-        }
-    }
+    Edge* edge = Node::isConnected(node1, node2);
+    if (edge != NULL)
+        return edge;
+
     // else create new Edge
-    Edge *edge = new Edge(this, node1, node2);
+    edge = new Edge(this, node1, node2);
     scene()->addItem(edge);
     currentFrame->addEdge(edge);
     return edge;

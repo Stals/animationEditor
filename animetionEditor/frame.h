@@ -16,6 +16,8 @@ public:
     void addNode(Node *node);
     // adds edge to items
     void addEdge(Edge *edge);
+    // create new edge from node id's and adds it to frame
+    void addEdge(GraphWidget *graphWidget, int id1, int id2);
 
     // removes node from items
     void removeNode(Node *node);

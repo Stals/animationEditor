@@ -25,6 +25,9 @@ public:
     // removes all edges that have a connection to this node
     void removeConnections();
 
+    // returns Edge if nodes are connected, else returns NULL
+    static Edge* isConnected(Node* node1, Node* node2);
+
     std::list<Edge*> edges() const;
 
     enum { Type = UserType + 1 };

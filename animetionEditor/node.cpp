@@ -44,6 +44,16 @@ void Node::removeConnections(){
     }
 }
 
+Edge *Node::isConnected(Node *node1, Node *node2){
+    std::list<Edge*> edges = node1->edges();
+    for(std::list<Edge*>::iterator edgeIt = edges.begin(); edgeIt != edges.end(); ++edgeIt){
+    if(((*edgeIt)->destNode() == node2) || ((*edgeIt)->sourceNode() == node2)){
+            return *edgeIt;
+        }
+    }
+    return NULL;
+}
+
 std::list<Edge*> Node::edges() const{
     return edgeList;
 }

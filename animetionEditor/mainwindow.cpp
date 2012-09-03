@@ -141,51 +141,69 @@ void MainWindow::load(){
             TODO DO STUFF HERE
         */
 
-        QDomDocument doc("mydocument");
+        QDomDocument doc;
         if (!doc.setContent(&file)) {
             file.close();
             return;
         }
         file.close();
 
-        // print out the element names of all elements that are direct children
-        // of the outermost element.
+        Animation *loadedAnimation = new Animation;
         QDomElement docElem = doc.documentElement();
 
-        QDomNode n = docElem.firstChild();
-        while(!n.isNull()) {
-            QDomElement e = n.toElement(); // try to convert the node to an element.
-            // TODO call e.attribute("x"); to get 'x'
-            if(!e.isNull()) {
-                std::cout<<(qPrintable(e.tagName()))<<std::endl; // the node really is an element.
-            }
-            n = n.nextSibling();
+        QDomNode frameNode = docElem.firstChild();
+        while(!frameNode.isNull()) {
+            Frame *frame = new Frame;
+
+                // for each node in frame
+                QDomNode nodesNode = frameNode.firstChild();
+                if(!nodesNode.isNull()){
+                    QDomNode nodeNode = nodesNode.firstChild();
+                    while(!nodeNode.isNull()){
+                        QDomElement nodeElem = nodeNode.toElement();
+                        //get info about the node
+                        qreal x = nodeElem.attribute("x").toDouble();
+                        qreal y = nodeElem.attribute("y").toDouble();
+                        // create new node
+                        Node *node = new Node(graphWidget, x, y);
+                        // add node to the frame
+                        frame->addNode(node);
+                        // go to next node
+                        nodeNode = nodeNode.nextSibling();
+                    }
+
+                }
+
+                // for each edge in frame
+                QDomNode edgesNode = nodesNode.nextSibling();
+                if(!edgesNode.isNull()){
+                    QDomNode edgeNode = edgesNode.firstChild();
+                    while(!edgeNode.isNull()){
+                        QDomElement edgeElem = edgeNode.toElement();
+                        //get info about the edge
+                        int id1 = edgeElem.attribute("node1").toInt();
+                        int id2 = edgeElem.attribute("node2").toInt();
+                        // create new edge from id's
+                        frame->addEdge(graphWidget, id1, id2);
+                        // go to next edge
+                        edgeNode = edgeNode.nextSibling();
+                    }
+                }
+
+            // add frame to animation
+            loadedAnimation->addFrame(frame);
+            // go to next frame
+            frameNode = frameNode.nextSibling();
         }
 
-        // Here we append a new element to the end of the document
-        QDomElement elem = doc.createElement("img");
-        elem.setAttribute("src", "myimage.png");
-        docElem.appendChild(elem);
-
-
+        // delete previous animation and show loaded one
+        delete animation;
+        animation = loadedAnimation;
+        currentFrameNumber = 1;
+        showCurrentFrame();
 
     }
 }
-
-
-//        // TODO load file and show first frame
-//        // TODO i will need to clear all the current animation and then add new
-//        // animation.clear();
-//        // //make frame from file
-//        // animation.addFrame(frame);
-//        this->setWindowTitle("animationEditor - " + filename);
-//        currentFrameNumber = 1;
-//        showCurrentFrame();
-
-
-
-//    }
-//}
 
 void MainWindow::nextFrame(){
     // reset 'from' node
@@ -226,22 +244,3 @@ void MainWindow::on_checkBox_toggled(bool checked){
     if (checked == false)
         graphWidget->from = NULL;
 }
-
-//TODO take code for loading
-//void MainWindow::on_pushButton_clicked()
-//{
-//    Frame *frame = new Frame;
-//    animation->addFrame(frame);
-
-//    Node *node1 = new Node(graphWidget, 100, 100);
-//    Node *node2 = new Node(graphWidget, 50, 50);
-
-//    frame->addNode(node1);
-//    frame->addNode(node2);
-
-//    Edge *edge = new Edge(graphWidget, node1, node2);
-
-//    frame->addEdge(edge);
-
-//    this->showCurrentFrame();
-//}
