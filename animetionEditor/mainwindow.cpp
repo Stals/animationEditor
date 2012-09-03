@@ -107,10 +107,7 @@ void MainWindow::showCurrentFrame(){
     // change frameNumber
     frameNumber->setText(QString::number(currentFrameNumber));
 
-    // TODO get data and show it
-        // get it from vector like this animation[currentFrame - 1]
-            // Can probably make showCurrentFrame after inheriting GraficsView,
-            //(after renameign to to FrameVier) and give this mehid a frame
+    // show current frame
     graphWidget->showFrame(animation->frames[currentFrameNumber - 1]);
 }
 
