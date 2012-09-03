@@ -72,6 +72,10 @@ void MainWindow::load(){
     // only if file was opened
     if(filename.size()){
         // TODO load file and show first frame
+        // TODO i will need to clear all the current animation and then add new
+        // animation.clear();
+        // //make frame from file
+        // animation.addFrame(frame);
         this->setWindowTitle("animationEditor - " + filename);
         currentFrameNumber = 1;
         showCurrentFrame();
