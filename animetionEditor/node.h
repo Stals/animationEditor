@@ -14,11 +14,14 @@ QT_END_NAMESPACE
 // x and y are stored in base class
 class Node : public QGraphicsItem{
 public:
-    Node(GraphWidget *graphWidget);
+    Node(GraphWidget *graphWidget, qreal x = 0, qreal y = 0);
+
     ~Node();
 
     void addEdge(Edge *edge);
     void removeEdge(Edge *edge);
+
+    void removeConnections();
 
     std::list<Edge*> edges() const;
 

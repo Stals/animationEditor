@@ -9,7 +9,8 @@
 GraphWidget::GraphWidget(QWidget *parent)
     : QGraphicsView(parent),
       addEdges(false),
-      from(NULL){
+      from(NULL),
+      currentFrame(new Frame){
 
     // TODO understand what does what and remove unnessary stuff
     QGraphicsScene *scene = new QGraphicsScene(this);
@@ -24,17 +25,15 @@ GraphWidget::GraphWidget(QWidget *parent)
     setMinimumSize(400, 400);
     setWindowTitle(tr("Elastic Nodes"));
 
-    Node *node1 = createNode(50, 50);
-    Node *node2 = createNode(100, 100);
-    Node *node3 = createNode(50, 100);
-    Node *node4 = createNode(250, 250);
+//    Node *node1 = createNode(50, 50);
+//    Node *node2 = createNode(100, 100);
+//    Node *node3 = createNode(50, 100);
+//    Node *node4 = createNode(250, 250);
 
-    createEdge(node1, node2);
-    createEdge(node2, node3);
-    createEdge(node4, node2);
-    createEdge(node3, node1);
-
-    emptyScene();
+//    createEdge(node1, node2);
+//    createEdge(node2, node3);
+//    createEdge(node4, node2);
+//    createEdge(node3, node1);
 
 }
 
@@ -111,17 +110,22 @@ void GraphWidget::mousePressEvent(QMouseEvent *event){
 
 void GraphWidget::removeNode(Node *node){
     scene()->removeItem(node);
+    currentFrame->removeNode(node);
     // deleting node will also delete all conected edges
+    node->removeConnections();
     delete node;
 }
 
 void GraphWidget::removeEdge(Edge *edge){
     scene()->removeItem(edge);
+    currentFrame->removeEdge(edge);
     // deleting edge will also delete it from nodes it is connected to
     delete edge;
 }
 
 void GraphWidget::showFrame(Frame *frame){
+    currentFrame = frame;
+
     QList<Node*> nodes;
     QList<Edge*> edges;
     foreach (QGraphicsItem *item, frame->items) {
@@ -130,12 +134,13 @@ void GraphWidget::showFrame(Frame *frame){
         else if (Edge *edge = qgraphicsitem_cast<Edge*>(item))
             edges << edge;
     }
-    foreach (Node *node, nodes)
+    foreach (Node *node, nodes){
         addNode(node);
-    foreach (Edge *edge, edges)
+    }
+    foreach (Edge *edge, edges){
         addEdge(edge);
+    }
 }
-
 void GraphWidget::emptyScene(){
     // TODO может быть утечка памяти, так как я не удаляю сами объекты
 //        QList<Node*> nodes;
@@ -174,6 +179,7 @@ Edge *GraphWidget::createEdge(Node *node1, Node *node2){
     // else create new Edge
     Edge *edge = new Edge(this, node1, node2);
     scene()->addItem(edge);
+    currentFrame->addEdge(edge);
     return edge;
 }
 
@@ -181,5 +187,6 @@ Node *GraphWidget::createNode(qreal x, qreal y){
     Node *node = new Node(this);
     scene()->addItem(node);
     node->setPos(x, y);
+    currentFrame->addNode(node);
     return node;
 }

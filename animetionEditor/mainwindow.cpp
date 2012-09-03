@@ -4,6 +4,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    animation(new Animation),
     currentFrameNumber(1){
 
     ui->setupUi(this);
@@ -36,11 +37,15 @@ MainWindow::MainWindow(QWidget *parent) :
     frameNumber->setGeometry(graphWidget->width() - labelWidth - labelIndent, labelIndent,
                              labelWidth, labelHeight);
 
+    /* Animation */
+    animation->addFrame(new Frame);
+    showCurrentFrame();
 }
 
 
 MainWindow::~MainWindow(){
     delete frameNumber;
+    delete animation;
     delete graphWidget;
     delete ui;
 }
@@ -74,13 +79,20 @@ void MainWindow::load(){
 }
 
 void MainWindow::nextFrame(){
+    // reset 'from' node
+    graphWidget->from = NULL;
     ++currentFrameNumber;
-    //TODO if currentFrameNumber - 1 > animation.frames.length()
-        // create new frame
+    //if there are no such frame - create new frame
+    if(animation->frames.size() < currentFrameNumber){
+        Frame *frame = new Frame();
+        animation->addFrame(frame);
+    }
     showCurrentFrame();
 }
 
 void MainWindow::prevFrame(){
+    // reset 'from' node
+    graphWidget->from = NULL;
     // go to previous frame unless it is the first one
     if(currentFrameNumber > 1){
         --currentFrameNumber;
@@ -89,6 +101,9 @@ void MainWindow::prevFrame(){
 }
 
 void MainWindow::showCurrentFrame(){
+    // claer previous frame
+    graphWidget->emptyScene();
+
     // change frameNumber
     frameNumber->setText(QString::number(currentFrameNumber));
 
@@ -96,6 +111,7 @@ void MainWindow::showCurrentFrame(){
         // get it from vector like this animation[currentFrame - 1]
             // Can probably make showCurrentFrame after inheriting GraficsView,
             //(after renameign to to FrameVier) and give this mehid a frame
+    graphWidget->showFrame(animation->frames[currentFrameNumber - 1]);
 }
 
 void MainWindow::on_checkBox_toggled(bool checked){
@@ -104,4 +120,22 @@ void MainWindow::on_checkBox_toggled(bool checked){
     // If is was turned off - reset 'from'
     if (checked == false)
         graphWidget->from = NULL;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    Frame *frame = new Frame;
+    animation->addFrame(frame);
+
+    Node *node1 = new Node(graphWidget, 100, 100);
+    Node *node2 = new Node(graphWidget, 50, 50);
+
+    frame->addNode(node1);
+    frame->addNode(node2);
+
+    Edge *edge = new Edge(graphWidget, node1, node2);
+
+    frame->addEdge(edge);
+
+    this->showCurrentFrame();
 }

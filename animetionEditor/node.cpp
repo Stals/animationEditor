@@ -7,8 +7,10 @@
 #include "node.h"
 #include "graphwidget.h"
 
-Node::Node(GraphWidget *graphWidget)
+Node::Node(GraphWidget *graphWidget, qreal x, qreal y)
     : graph(graphWidget){
+
+    this->setPos(x, y);
 
     setFlag(ItemIsMovable);
     setFlag(ItemSendsGeometryChanges);
@@ -18,14 +20,6 @@ Node::Node(GraphWidget *graphWidget)
 }
 
 Node::~Node(){
-    //TODO попробывать переписать без использования копии
-    std::list<Edge*> edgeListCopy = edgeList;
-
-    std::list<Edge*>::iterator edgeIt = edgeListCopy.begin();
-    for(; edgeIt != edgeListCopy.end(); ++edgeIt){
-        graph->scene()->removeItem(*edgeIt);
-        delete *edgeIt;
-    }
 }
 
 void Node::addEdge(Edge *edge){
@@ -35,6 +29,16 @@ void Node::addEdge(Edge *edge){
 
 void Node::removeEdge(Edge *edge){
     edgeList.remove(edge);
+}
+
+void Node::removeConnections(){
+    //TODO попробывать переписать без использования копии
+    std::list<Edge*> edgeListCopy = edgeList;
+
+    std::list<Edge*>::iterator edgeIt = edgeListCopy.begin();
+    for(; edgeIt != edgeListCopy.end(); ++edgeIt){
+        graph->removeEdge(*edgeIt);
+    }
 }
 
 std::list<Edge*> Node::edges() const{

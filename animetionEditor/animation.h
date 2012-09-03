@@ -9,9 +9,9 @@ class Animation{
 public:
     Animation();
     ~Animation();
-    void addFrame(Frame frame);
+    void addFrame(Frame* frame);
 
-    std::vector<Frame> frames;
+    std::vector<Frame*> frames;
 };
 
 #endif // ANIMATION_H

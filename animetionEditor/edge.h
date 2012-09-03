@@ -2,6 +2,7 @@
 #define EDGE_H
 
 #include <QGraphicsItem>
+#include <QPen>
 
 class Node;
 class GraphWidget;

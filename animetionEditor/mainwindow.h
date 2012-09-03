@@ -7,6 +7,9 @@
 #include <QLabel>
 
 #include "graphwidget.h"
+#include "node.h"
+#include "edge.h"
+#include "animation.h"
 
 namespace Ui {
 class MainWindow;
@@ -37,8 +40,13 @@ private slots:
 
     void on_checkBox_toggled(bool checked);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    Animation *animation;
+
     GraphWidget *graphWidget;
     QLabel *frameNumber;
     QMenu *fileMenu;

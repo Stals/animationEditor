@@ -29,9 +29,9 @@ public:
     // Removes all items from the scene, but does not delete them
     void emptyScene();
 
-    // Creates and edge between node1 and node2, ands it to the scene and return pointer
+    // Creates an edge between node1 and node2, ands it to the scene and frame. Return pointer to it.
     Edge *createEdge(Node *node1, Node *node2);
-    // Creates a node, adds it to the scene and returns pointer
+    // Creates a node, adds it to the scene and frame. Returns pointer to it.
     Node *createNode(qreal x, qreal y);
 
 
@@ -47,6 +47,9 @@ protected:
     void drawBackground(QPainter *painter, const QRectF &rect);
 
     void mousePressEvent(QMouseEvent *event);
+
+private:
+    Frame *currentFrame;
 };
 
 #endif
