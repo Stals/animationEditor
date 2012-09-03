@@ -19,9 +19,9 @@ public:
     void addEdge(Edge *edge);
     // removes node from the scene
     void addNode(Node *node);
-    // removes node from scene, removes its edges and deletes the node
+    // removes node from scene and the frame, removes its edges and deletes the node
     void removeNode(Node *node);
-    // removes edge from scene and removes liks to it from source and distionation
+    // removes edge from scene and the frame, removes links to it from source and distionation
     void removeEdge(Edge *edge);
 
     // adds all nodes and edges to the scene
