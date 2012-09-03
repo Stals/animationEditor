@@ -88,8 +88,7 @@ void MainWindow::nextFrame(){
     ++currentFrameNumber;
     //if there are no such frame - create new frame
     if(animation->frames.size() < currentFrameNumber){
-        Frame *frame = new Frame();
-        animation->addFrame(frame);
+        animation->addFrame(new Frame);
     }
     showCurrentFrame();
 }
