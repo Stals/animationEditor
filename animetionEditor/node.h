@@ -11,7 +11,7 @@ class QGraphicsSceneMouseEvent;
 QT_END_NAMESPACE
 
 // TODO description
-// x and y are stored in base class
+// Note: x and y are stored in base class,
 // each node has a unique id
 class Node : public QGraphicsItem{
 public:
