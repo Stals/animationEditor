@@ -15,12 +15,12 @@ QT_END_NAMESPACE
 class Node : public QGraphicsItem{
 public:
     Node(GraphWidget *graphWidget, qreal x = 0, qreal y = 0);
-
     ~Node();
 
     void addEdge(Edge *edge);
     void removeEdge(Edge *edge);
 
+    // removes all edges that have a connection to this node
     void removeConnections();
 
     std::list<Edge*> edges() const;
