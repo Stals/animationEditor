@@ -2,9 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QFileDialog>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QtXml/QtXml>
+
+//TODO remove for debug only
+#include <iostream>
 
 #include "graphwidget.h"
 #include "node.h"

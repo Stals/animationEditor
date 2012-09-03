@@ -61,26 +61,91 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 }
 
 void MainWindow::save(){
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Save Animation"), "",
+                                                    tr("(*.ae)"));
+    if (fileName.isEmpty())
+        return;
+    else {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::information(this, tr("Unable to open file"),
+                                     file.errorString());
+            return;
+        }
+        /*
+            TODO DO STUFF HERE
+        */
 
+
+
+        file.close();
+    }
 }
 
 void MainWindow::load(){
-    // get filename from user
-    QString filename = QFileDialog::getOpenFileName(this,
-        tr("Load Animation"), "", tr("*.ae"));
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Load Animation"), "",
+                                                    tr("(*.ae)"));
+    if (fileName.isEmpty())
+        return;
+    else {
 
-    // only if file was opened
-    if(filename.size()){
-        // TODO load file and show first frame
-        // TODO i will need to clear all the current animation and then add new
-        // animation.clear();
-        // //make frame from file
-        // animation.addFrame(frame);
-        this->setWindowTitle("animationEditor - " + filename);
-        currentFrameNumber = 1;
-        showCurrentFrame();
+        QFile file(fileName);
+
+        if (!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::information(this, tr("Unable to open file"),
+                                     file.errorString());
+            return;
+        }
+        /*
+            TODO DO STUFF HERE
+        */
+
+        QDomDocument doc("mydocument");
+        if (!doc.setContent(&file)) {
+            file.close();
+            return;
+        }
+        file.close();
+
+        // print out the element names of all elements that are direct children
+        // of the outermost element.
+        QDomElement docElem = doc.documentElement();
+
+        QDomNode n = docElem.firstChild();
+        while(!n.isNull()) {
+            QDomElement e = n.toElement(); // try to convert the node to an element.
+            // TODO call e.attribute("x"); to get 'x'
+            if(!e.isNull()) {
+                std::cout<<(qPrintable(e.tagName()))<<std::endl; // the node really is an element.
+            }
+            n = n.nextSibling();
+        }
+
+        // Here we append a new element to the end of the document
+        QDomElement elem = doc.createElement("img");
+        elem.setAttribute("src", "myimage.png");
+        docElem.appendChild(elem);
+
+
     }
 }
+
+
+//        // TODO load file and show first frame
+//        // TODO i will need to clear all the current animation and then add new
+//        // animation.clear();
+//        // //make frame from file
+//        // animation.addFrame(frame);
+//        this->setWindowTitle("animationEditor - " + filename);
+//        currentFrameNumber = 1;
+//        showCurrentFrame();
+
+
+
+//    }
+//}
 
 void MainWindow::nextFrame(){
     // reset 'from' node
