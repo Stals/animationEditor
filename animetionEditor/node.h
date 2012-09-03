@@ -20,10 +20,6 @@ public:
 
     int id;
 
-    // resets newId to 0
-    // used when removing previous animation
-    static void resetNewId();
-
     void addEdge(Edge *edge);
     void removeEdge(Edge *edge);
 

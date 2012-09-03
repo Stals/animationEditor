@@ -23,10 +23,8 @@ Node::Node(GraphWidget *graphWidget, qreal x, qreal y)
 }
 
 Node::~Node(){
-}
-
-void Node::resetNewId(){
-    newId = 0;
+    // if all nodes are deleted it should become 0 again
+    --newId;
 }
 
 void Node::addEdge(Edge *edge){

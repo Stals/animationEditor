@@ -140,9 +140,6 @@ void MainWindow::load(){
             return;
         }
 
-        // reset node id's so that they will start from 0 again
-        Node::resetNewId();
-
         QDomDocument doc;
         if (!doc.setContent(&file)) {
             file.close();
@@ -150,7 +147,9 @@ void MainWindow::load(){
         }
         file.close();
 
-        Animation *loadedAnimation = new Animation;
+        //delete previus animation and load new one
+        delete animation;
+        animation = new Animation;
         QDomElement docElem = doc.documentElement();
 
         QDomNode frameNode = docElem.firstChild();
@@ -193,14 +192,12 @@ void MainWindow::load(){
                 }
 
             // add frame to animation
-            loadedAnimation->addFrame(frame);
+            animation->addFrame(frame);
             // go to next frame
             frameNode = frameNode.nextSibling();
         }
 
-        // delete previous animation and show loaded one
-        delete animation;
-        animation = loadedAnimation;
+        // show loaded animation
         currentFrameNumber = 1;
         showCurrentFrame();
 
