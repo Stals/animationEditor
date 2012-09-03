@@ -97,3 +97,7 @@ void MainWindow::showCurrentFrame(){
             // Can probably make showCurrentFrame after inheriting GraficsView,
             //(after renameign to to FrameVier) and give this mehid a frame
 }
+
+void MainWindow::on_checkBox_toggled(bool checked){
+    graphWidget->addEdges = checked;
+}

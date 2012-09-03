@@ -7,7 +7,9 @@
 #include <math.h>
 
 GraphWidget::GraphWidget(QWidget *parent)
-    : QGraphicsView(parent){
+    : QGraphicsView(parent),
+      from(NULL),
+      addEdges(false){
 
     // TODO understand what does what and remove unnessary stuff
     QGraphicsScene *scene = new QGraphicsScene(this);
@@ -22,48 +24,15 @@ GraphWidget::GraphWidget(QWidget *parent)
     setMinimumSize(400, 400);
     setWindowTitle(tr("Elastic Nodes"));
 
-    Node *node1 = new Node(this);
-    Node *node2 = new Node(this);
-    Node *node3 = new Node(this);
-    Node *node4 = new Node(this);
-//    centerNode = new Node(this);
-//    Node *node6 = new Node(this);
-//    Node *node7 = new Node(this);
-//    Node *node8 = new Node(this);
-//    Node *node9 = new Node(this);
-    scene->addItem(node1);
-    scene->addItem(node2);
-    scene->addItem(node3);
-    scene->addItem(node4);
-//    scene->addItem(centerNode);
-//    scene->addItem(node6);
-//    scene->addItem(node7);
-//    scene->addItem(node8);
-//    scene->addItem(node9);
-    Edge * edge = new Edge(this, node1, node2);
-    scene->addItem(edge);
-    //scene->removeItem(edge);
-    scene->addItem(new Edge(this, node2, node3));
-//    scene->addItem(new Edge(node2, centerNode));
-//    scene->addItem(new Edge(node3, node6));
-    scene->addItem(new Edge(this, node4, node2));
-//    scene->addItem(new Edge(node4, centerNode));
-//    scene->addItem(new Edge(centerNode, node6));
-//    scene->addItem(new Edge(centerNode, node8));
-//    scene->addItem(new Edge(node6, node9));
-//    scene->addItem(new Edge(node7, node4));
-//    scene->addItem(new Edge(node8, node7));
-//    scene->addItem(new Edge(node9, node8));
+    Node *node1 = createNode(50, 50);
+    Node *node2 = createNode(100, 100);
+    Node *node3 = createNode(50, 100);
+    Node *node4 = createNode(250, 250);
 
-    node1->setPos(50, 50);
-    node2->setPos(100, 100);
-    node3->setPos(50, 100);
-    node4->setPos(250, 250);
-//    centerNode->setPos(0, 0);
-//    node6->setPos(50, 0);
-//    node7->setPos(-50, 50);
-//    node8->setPos(0, 50);
-//    node9->setPos(50, 50);
+    createEdge(node1, node2);
+    createEdge(node2, node3);
+    createEdge(node4, node2);
+    createEdge(node3, node1);
 
 }
 
@@ -155,4 +124,17 @@ void GraphWidget::emptyScene(){
 
         foreach (Node *node, nodes)
             removeNode(node);
+}
+
+Edge *GraphWidget::createEdge(Node *node1, Node *node2){
+    Edge *edge = new Edge(this, node1, node2);
+    scene()->addItem(edge);
+    return edge;
+}
+
+Node *GraphWidget::createNode(qreal x, qreal y){
+    Node *node = new Node(this);
+    scene()->addItem(node);
+    node->setPos(x, y);
+    return node;
 }

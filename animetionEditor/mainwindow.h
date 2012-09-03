@@ -35,6 +35,8 @@ private slots:
     // displays current frame and updates frameNumeber
     void showCurrentFrame();
 
+    void on_checkBox_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
     GraphWidget *graphWidget;
@@ -44,6 +46,7 @@ private:
     QAction *loadAction;
 
     int currentFrameNumber;
+
 };
 
 #endif // MAINWINDOW_H
