@@ -17,7 +17,9 @@ class Node : public QGraphicsItem{
 public:
     Node(GraphWidget *graphWidget, qreal x = 0, qreal y = 0);
     ~Node();
+
     int id;
+
     // resets newId to 0
     // used when removing previous animation
     static void resetNewId();
@@ -29,7 +31,7 @@ public:
     void removeConnections();
 
     // returns Edge if nodes are connected, else returns NULL
-    static Edge* isConnected(Node* node1, Node* node2);
+    static Edge *isConnected(Node* node1, Node* node2);
 
     std::list<Edge*> edges() const;
 
