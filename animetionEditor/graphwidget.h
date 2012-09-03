@@ -12,10 +12,20 @@ class GraphWidget : public QGraphicsView{
 public:
     GraphWidget(QWidget *parent = 0);
 
+    // adds node to the scene
+    void addEdge(Edge *edge);
+    // removes node from the scene
+    void addNode(Node *node);
+    // removes node from scene, removes its edges and deletes the node
+    void removeNode(Node *node);
+    // removes edge from scene and removes liks to it from source and distionation
+    void removeEdge(Edge *edge);
+
     // Creates and edge between node1 and node2, ands it to the scene and return pointer
     Edge *createEdge(Node *node1, Node *node2);
     // Creates a node, adds it to the scene and returns pointer
     Node *createNode(qreal x, qreal y);
+
 
     // if addEdges is true - create edges when click 2 nodes
     bool addEdges;
@@ -23,10 +33,6 @@ public:
     Node* from;
 
 public slots:
-    // removes node from scene, removes its edges and deletes the node
-    void removeNode(Node *node);
-    // removes edge from scene and removes liks to it from source and distionation
-    void removeEdge(Edge *edge);
 
     void emptyScene();
 protected:

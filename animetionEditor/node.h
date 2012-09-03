@@ -19,6 +19,7 @@ public:
 
     void addEdge(Edge *edge);
     void removeEdge(Edge *edge);
+
     std::list<Edge*> edges() const;
 
     enum { Type = UserType + 1 };

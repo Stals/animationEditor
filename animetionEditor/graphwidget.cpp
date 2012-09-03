@@ -36,6 +36,14 @@ GraphWidget::GraphWidget(QWidget *parent)
 
 }
 
+void GraphWidget::addEdge(Edge *edge){
+    scene()->addItem(edge);
+}
+
+void GraphWidget::addNode(Node *node){
+    scene()->addItem(node);
+}
+
 void GraphWidget::keyPressEvent(QKeyEvent *event){
     switch (event->key()) {
 //    case Qt::Key_Up:
@@ -92,11 +100,8 @@ void GraphWidget::drawBackground(QPainter *painter, const QRectF &rect){
 
 void GraphWidget::mousePressEvent(QMouseEvent *event){
     // add new Node on middle click
-    if(event->button() == Qt::MiddleButton){
-        Node *node = new Node(this);
-        scene()->addItem(node);
-
-        node->setPos(event->pos());
+    if(event->button() == Qt::MiddleButton){        
+        createNode(event->pos().x(), event->pos().y());
     }
     update();
     QGraphicsView::mousePressEvent(event);
@@ -126,7 +131,17 @@ void GraphWidget::emptyScene(){
             removeNode(node);
 }
 
+//TODO what if node1 == node2?
 Edge *GraphWidget::createEdge(Node *node1, Node *node2){
+    // Check if nodes are already connected
+    // just return pointer to this edge if they are
+    std::list<Edge*> edges = node1->edges();
+    for(std::list<Edge*>::iterator edgeIt = edges.begin(); edgeIt != edges.end(); ++edgeIt){
+    if(((*edgeIt)->destNode() == node2) || ((*edgeIt)->sourceNode() == node2)){
+            return *edgeIt;
+        }
+    }
+    // else create new Edge
     Edge *edge = new Edge(this, node1, node2);
     scene()->addItem(edge);
     return edge;
