@@ -8,8 +8,8 @@
 
 GraphWidget::GraphWidget(QWidget *parent)
     : QGraphicsView(parent),
-      from(NULL),
-      addEdges(false){
+      addEdges(false),
+      from(NULL){
 
     // TODO understand what does what and remove unnessary stuff
     QGraphicsScene *scene = new QGraphicsScene(this);
