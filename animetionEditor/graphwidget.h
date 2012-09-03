@@ -47,6 +47,7 @@ protected:
     void mousePressEvent(QMouseEvent *event);
 
 private:
+    // stores currently showed frame
     Frame *currentFrame;
 };
 
