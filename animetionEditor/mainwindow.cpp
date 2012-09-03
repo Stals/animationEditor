@@ -73,11 +73,50 @@ void MainWindow::save(){
                                      file.errorString());
             return;
         }
-        /*
-            TODO DO STUFF HERE
-        */
+
+        QDomDocument doc;
+
+        QDomElement animationElem = doc.createElement("animation");
+        doc.appendChild(animationElem);
+
+        for(std::vector<Frame*>::iterator frameIt = animation->frames.begin(); frameIt != animation->frames.end(); ++frameIt){
+            QDomElement frameElem = doc.createElement("frame");
+            animationElem.appendChild(frameElem);
+
+            QDomElement nodesElem = doc.createElement("nodes");
+            frameElem.appendChild(nodesElem);
+            QDomElement edgesElem = doc.createElement("edges");
+            frameElem.appendChild(edgesElem);
 
 
+            // get nodes and edges and save them one after another
+            QList<Node*> nodes;
+            QList<Edge*> edges;
+            foreach (QGraphicsItem *item, (*frameIt)->items) {
+                if (Node *node = qgraphicsitem_cast<Node*>(item))
+                    nodes << node;
+                else if (Edge *edge = qgraphicsitem_cast<Edge*>(item))
+                    edges << edge;
+            }
+            foreach (Node *node, nodes){
+                QDomElement nodeElem = doc.createElement("node");
+                nodeElem.setAttribute("id", node->id);
+                nodeElem.setAttribute("x", node->x());
+                nodeElem.setAttribute("y", node->y());
+                nodesElem.appendChild(nodeElem);
+            }
+            foreach (Edge *edge, edges){
+                QDomElement edgeElem = doc.createElement("edge");
+                edgeElem.setAttribute("node1", edge->sourceNode()->id);
+                edgeElem.setAttribute("node2", edge->destNode()->id);
+                edgesElem.appendChild(edgeElem);
+            }
+
+        }
+
+        // save doc to selected file
+        QTextStream TextStream(&file);
+        TextStream << doc.toString();
 
         file.close();
     }
@@ -127,6 +166,7 @@ void MainWindow::load(){
         QDomElement elem = doc.createElement("img");
         elem.setAttribute("src", "myimage.png");
         docElem.appendChild(elem);
+
 
 
     }
