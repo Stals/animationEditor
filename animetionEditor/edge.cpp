@@ -21,6 +21,7 @@ Edge::Edge(GraphWidget *graphWidget, Node *sourceNode, Node *destNode):
     dest = destNode;
     source->addEdge(this);
     dest->addEdge(this);
+    pen = QPen(Qt::black, lineWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     adjust();
 }
 
@@ -84,6 +85,28 @@ QRectF Edge::boundingRect() const{
 
 }
 
+QPainterPath Edge::shape() const{
+    QPainterPath path;
+
+    path.moveTo(sourcePoint.toPoint());
+    path.lineTo(destPoint.toPoint());
+
+    // Code from QGrapthicsLineItem implemetation
+    const qreal penWidthZero = qreal(0.00000001);
+
+    QPainterPathStroker ps;
+    ps.setCapStyle(pen.capStyle());
+    if (pen.widthF() <= 0.0)
+        ps.setWidth(penWidthZero);
+    else
+        ps.setWidth(pen.widthF());
+    ps.setJoinStyle(pen.joinStyle());
+    ps.setMiterLimit(pen.miterLimit());
+    QPainterPath p = ps.createStroke(path);
+    p.addPath(path);
+    return p;
+}
+
 void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
     if (!source || !dest)
         return;
@@ -93,7 +116,7 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
         return;
 
     // Draw the line itself
-    painter->setPen(QPen(Qt::black, lineWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter->setPen(pen);
     painter->drawLine(line);
 }
 

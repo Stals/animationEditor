@@ -22,9 +22,11 @@ public:
     enum { Type = UserType + 2 };
     int type() const { return Type; }
     
-protected:
     QRectF boundingRect() const;
+    QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+protected:
+
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
@@ -36,6 +38,7 @@ private:
 
     GraphWidget *graph;
 
+    QPen pen;
     static const int lineWidth = 2;
 
 };
