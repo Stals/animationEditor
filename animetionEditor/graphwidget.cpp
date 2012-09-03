@@ -34,6 +34,8 @@ GraphWidget::GraphWidget(QWidget *parent)
     createEdge(node4, node2);
     createEdge(node3, node1);
 
+    emptyScene();
+
 }
 
 void GraphWidget::addEdge(Edge *edge){
@@ -119,16 +121,44 @@ void GraphWidget::removeEdge(Edge *edge){
     delete edge;
 }
 
+void GraphWidget::showFrame(Frame *frame){
+    QList<Node*> nodes;
+    QList<Edge*> edges;
+    foreach (QGraphicsItem *item, frame->items) {
+        if (Node *node = qgraphicsitem_cast<Node*>(item))
+            nodes << node;
+        else if (Edge *edge = qgraphicsitem_cast<Edge*>(item))
+            edges << edge;
+    }
+    foreach (Node *node, nodes)
+        addNode(node);
+    foreach (Edge *edge, edges)
+        addEdge(edge);
+}
+
 void GraphWidget::emptyScene(){
     // TODO может быть утечка памяти, так как я не удаляю сами объекты
-        QList<Node*> nodes;
-        foreach (QGraphicsItem *item, scene()->items()) {
-            if (Node *node = qgraphicsitem_cast<Node*>(item))
-                nodes << node;
-        }
+//        QList<Node*> nodes;
+//        foreach (QGraphicsItem *item, scene()->items()) {
+//            if (Node *node = qgraphicsitem_cast<Node*>(item))
+//                nodes << node;
+//        }
 
-        foreach (Node *node, nodes)
-            removeNode(node);
+//        foreach (Node *node, nodes)
+//            removeNode(node);
+
+    QList<Node*> nodes;
+    QList<Edge*> edges;
+    foreach (QGraphicsItem *item, scene()->items()) {
+        if (Node *node = qgraphicsitem_cast<Node*>(item))
+            nodes << node;
+        else if (Edge *edge = qgraphicsitem_cast<Edge*>(item))
+            edges << edge;
+    }
+    foreach (Node *node, nodes)
+        scene()->removeItem(node);
+    foreach (Edge *edge, edges)
+        scene()->removeItem(edge);
 }
 
 //TODO what if node1 == node2?

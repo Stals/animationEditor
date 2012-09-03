@@ -3,6 +3,8 @@
 
 #include <QtGui/QGraphicsView>
 
+#include "frame.h"
+
 class Node;
 class Edge;
 
@@ -21,6 +23,12 @@ public:
     // removes edge from scene and removes liks to it from source and distionation
     void removeEdge(Edge *edge);
 
+    // adds all nodes and edges to the scene
+    void showFrame(Frame *frame);
+
+    // Removes all items from the scene, but does not delete them
+    void emptyScene();
+
     // Creates and edge between node1 and node2, ands it to the scene and return pointer
     Edge *createEdge(Node *node1, Node *node2);
     // Creates a node, adds it to the scene and returns pointer
@@ -34,7 +42,6 @@ public:
 
 public slots:
 
-    void emptyScene();
 protected:
     void keyPressEvent(QKeyEvent *event);
     void drawBackground(QPainter *painter, const QRectF &rect);
