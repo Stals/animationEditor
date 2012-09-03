@@ -39,7 +39,6 @@ void Node::removeEdge(Edge *edge){
 }
 
 void Node::removeConnections(){
-    //TODO попробывать переписать без использования копии
     std::list<Edge*> edgeListCopy = edgeList;
 
     std::list<Edge*>::iterator edgeIt = edgeListCopy.begin();
@@ -102,7 +101,6 @@ QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value){
 }
 
 void Node::mousePressEvent(QGraphicsSceneMouseEvent *event){
-    // TODO rewrite with a switch case
     if(event->button() == Qt::RightButton){
         // remove node and its edges
         graph->removeNode(this);

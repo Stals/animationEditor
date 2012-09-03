@@ -8,9 +8,6 @@
 #include <QLabel>
 #include <QtXml/QtXml>
 
-//TODO remove for debug only
-#include <iostream>
-
 #include "graphwidget.h"
 #include "node.h"
 #include "edge.h"

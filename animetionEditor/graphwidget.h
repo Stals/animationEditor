@@ -43,9 +43,6 @@ public:
 public slots:
 
 protected:
-    void keyPressEvent(QKeyEvent *event);
-    void drawBackground(QPainter *painter, const QRectF &rect);
-
     void mousePressEvent(QMouseEvent *event);
 
 private:

@@ -46,7 +46,7 @@ void Edge::adjust(){
 
     prepareGeometryChange();
 
-    if (length > qreal(20.)) { // TODO откуда 20? размер ноды? бывший
+    if (length > qreal(20.)) {
         sourcePoint = line.p1();
         destPoint = line.p2();
     } else {
