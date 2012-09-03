@@ -12,10 +12,12 @@ QT_END_NAMESPACE
 
 // TODO description
 // x and y are stored in base class
+// each node has a unique id
 class Node : public QGraphicsItem{
 public:
     Node(GraphWidget *graphWidget, qreal x = 0, qreal y = 0);
     ~Node();
+    int id;
 
     void addEdge(Edge *edge);
     void removeEdge(Edge *edge);
@@ -42,6 +44,8 @@ protected:
     
 private:
     static const double ellipseSide = 15;
+    // static integer that stores if fore the next node
+    static int newId;
     QPointF newPos;
     GraphWidget *graph;
     std::list<Edge*> edgeList;

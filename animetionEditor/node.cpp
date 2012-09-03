@@ -7,9 +7,12 @@
 #include "node.h"
 #include "graphwidget.h"
 
+int Node::newId = 0;
+
 Node::Node(GraphWidget *graphWidget, qreal x, qreal y)
     : graph(graphWidget){
 
+    id = newId++;
     this->setPos(x, y);
 
     setFlag(ItemIsMovable);
