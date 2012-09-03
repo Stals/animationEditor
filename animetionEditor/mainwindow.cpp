@@ -77,6 +77,8 @@ void MainWindow::load(){
 
 void MainWindow::nextFrame(){
     ++currentFrameNumber;
+    //TODO if currentFrameNumber - 1 > animation.frames.length()
+        // create new frame
     showCurrentFrame();
 }
 
@@ -96,4 +98,12 @@ void MainWindow::showCurrentFrame(){
         // get it from vector like this animation[currentFrame - 1]
             // Can probably make showCurrentFrame after inheriting GraficsView,
             //(after renameign to to FrameVier) and give this mehid a frame
+}
+
+void MainWindow::on_checkBox_toggled(bool checked){
+    graphWidget->addEdges = checked;
+
+    // If is was turned off - reset 'from'
+    if (checked == false)
+        graphWidget->from = NULL;
 }

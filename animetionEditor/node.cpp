@@ -89,13 +89,28 @@ QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value){
 }
 
 void Node::mousePressEvent(QGraphicsSceneMouseEvent *event){
+    // TODO rewrite with a switch case
     if(event->button() == Qt::RightButton){
         // remove node and its edges
         graph->removeNode(this);
-    }else{
+        return;
+    }
+    else if(event->button() == Qt::LeftButton){
+        if(graph->addEdges){
+            if(graph->from == NULL){
+                // if this is a first node to be selected
+                graph->from = this;
+            }else{
+                // if it is the second one - create an edge
+                graph->createEdge(graph->from, this);
+                // reset from
+                graph->from = NULL;
+            }
+        }
+    }
         update();
         QGraphicsItem::mousePressEvent(event);
-    }
+
 }
 
 void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
