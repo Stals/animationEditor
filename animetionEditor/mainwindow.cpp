@@ -24,8 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* GraphWidget */
     graphWidget = new GraphWidget(this);
-    // TODO why 410? Причем если менять ошибка только при создании. Тоесть mouse event что-то не так понимает
-    graphWidget->setGeometry(0,ui->menuBar->height(),410,410);
+    graphWidget->setGeometry(0, ui->menuBar->height(),410,410);
 
     /* frameNumber */
     frameNumber = new QLabel("1", graphWidget);
@@ -60,6 +59,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     QMainWindow::keyPressEvent(event);
 }
 
+// TODO move save() and load() into separate file
 void MainWindow::save(){
     QString fileName = QFileDialog::getSaveFileName(this,
                                                     tr("Save Animation"), "",

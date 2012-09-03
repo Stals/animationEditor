@@ -7,7 +7,7 @@
 #include "node.h"
 #include "edge.h"
 
-// Stores a single frame
+// Stores items that will be shown on graphWidget
 class Frame{
 public:
     Frame();

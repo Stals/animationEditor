@@ -10,6 +10,7 @@ QT_BEGIN_NAMESPACE
 class QGraphicsSceneMouseEvent;
 QT_END_NAMESPACE
 
+//TODO description
 class Edge : public QGraphicsItem{
 public:
     Edge(GraphWidget *graphWidget, Node *sourceNode, Node *destNode);

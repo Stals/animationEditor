@@ -8,6 +8,7 @@
 class Node;
 class Edge;
 
+//TODO description
 class GraphWidget : public QGraphicsView{
     Q_OBJECT
 
