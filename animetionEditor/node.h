@@ -10,7 +10,6 @@ QT_BEGIN_NAMESPACE
 class QGraphicsSceneMouseEvent;
 QT_END_NAMESPACE
 
-// TODO description
 // Note: x and y are stored in base class,
 // each node has a unique id
 class Node : public QGraphicsItem{
@@ -20,7 +19,9 @@ public:
 
     int id;
 
+    // adds edge to the edge list and adjusts it
     void addEdge(Edge *edge);
+    // removes edge from the edgeList
     void removeEdge(Edge *edge);
 
     // removes all edges that have a connection to this node

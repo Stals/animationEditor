@@ -8,14 +8,14 @@
 class Node;
 class Edge;
 
-// T
+// Widget for displaying and interacting with nodes and edges
 class GraphWidget : public QGraphicsView{
     Q_OBJECT
 
 public:
     GraphWidget(QWidget *parent = 0, const int width = 400, const int height = 400);
 
-    // adds all nodes and edges to the scene
+    // adds all nodes and edges from the frame to the scene
     void showFrame(Frame *frame);
 
     // adds node to the scene
