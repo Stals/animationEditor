@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+const int graphWidth = 400;
+const int graphHeight = 400;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -23,8 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(loadAction, SIGNAL(triggered()), this, SLOT(load()));
 
     /* GraphWidget */
-    graphWidget = new GraphWidget(this);
-    graphWidget->setGeometry(0, ui->menuBar->height(),410,410);
+    graphWidget = new GraphWidget(this, graphWidth, graphHeight);
+    graphWidget->setGeometry(0, ui->menuBar->height(), graphWidth + 10, graphHeight + 10);
 
     /* frameNumber */
     frameNumber = new QLabel("1", graphWidget);
@@ -61,6 +64,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
 // TODO move save() and load() into separate file
 void MainWindow::save(){
+    // Get fileName from user
     QString fileName = QFileDialog::getSaveFileName(this,
                                                     tr("Save Animation"), "",
                                                     tr("(*.ae)"));
@@ -123,8 +127,7 @@ void MainWindow::save(){
 }
 
 void MainWindow::load(){
-
-
+    // Get fileName from user
     QString fileName = QFileDialog::getOpenFileName(this,
                                                     tr("Load Animation"), "",
                                                     tr("(*.ae)"));

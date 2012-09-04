@@ -6,7 +6,7 @@
 
 #include <math.h>
 
-GraphWidget::GraphWidget(QWidget *parent)
+GraphWidget::GraphWidget(QWidget *parent, const int width, const int height)
     : QGraphicsView(parent),
       addEdges(false),
       from(NULL),
@@ -14,12 +14,12 @@ GraphWidget::GraphWidget(QWidget *parent)
 
     QGraphicsScene *scene = new QGraphicsScene(this);
     scene->setItemIndexMethod(QGraphicsScene::NoIndex);
-    scene->setSceneRect(0, 0, 400, 400);
+    scene->setSceneRect(0, 0, width, height);
     setScene(scene);
     setCacheMode(CacheBackground);
     setViewportUpdateMode(BoundingRectViewportUpdate);
     setRenderHint(QPainter::Antialiasing);
-    setMinimumSize(400, 400);
+    setMinimumSize(width, height);
 }
 
 void GraphWidget::addEdge(Edge *edge){

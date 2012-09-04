@@ -55,17 +55,6 @@ void Edge::adjust(){
 }
 
 QRectF Edge::boundingRect() const{
-//    if (!source || !dest)
-//        return QRectF();
-
-//    qreal penWidth = lineWidth;
-//    qreal extra = (penWidth ) / 2.0;
-
-//    return QRectF(sourcePoint, QSizeF(destPoint.x() - sourcePoint.x(),
-//                                      destPoint.y() - sourcePoint.y()))
-//        .normalized()
-//        .adjusted(-extra, -extra, extra, extra);
-
     if (!source || !dest)
         return QRectF();
 

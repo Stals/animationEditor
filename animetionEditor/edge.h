@@ -27,11 +27,11 @@ public:
     QRectF boundingRect() const;
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
 protected:
-
-
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
 private:
     Node *source, *dest;
 
@@ -42,7 +42,6 @@ private:
 
     QPen pen;
     static const int lineWidth = 2;
-
 };
 
 #endif

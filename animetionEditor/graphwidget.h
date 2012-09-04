@@ -8,12 +8,15 @@
 class Node;
 class Edge;
 
-//TODO description
+// T
 class GraphWidget : public QGraphicsView{
     Q_OBJECT
 
 public:
-    GraphWidget(QWidget *parent = 0);
+    GraphWidget(QWidget *parent = 0, const int width = 400, const int height = 400);
+
+    // adds all nodes and edges to the scene
+    void showFrame(Frame *frame);
 
     // adds node to the scene
     void addEdge(Edge *edge);
@@ -24,9 +27,6 @@ public:
     // removes edge from scene and the frame, removes links to it from source and distionation
     void removeEdge(Edge *edge);
 
-    // adds all nodes and edges to the scene
-    void showFrame(Frame *frame);
-
     // Removes all items from the scene, but does not delete them
     void emptyScene();
 
@@ -36,12 +36,10 @@ public:
     Node *createNode(qreal x, qreal y);
 
 
-    // if addEdges is true - create edges when click 2 nodes
+    // if addEdges is true - edge will be created after clicking 2 nodes
     bool addEdges;
     // stores a node to create an edge from
     Node* from;
-
-public slots:
 
 protected:
     void mousePressEvent(QMouseEvent *event);
